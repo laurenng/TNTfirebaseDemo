@@ -1,0 +1,53 @@
+/* CSS for what we can't easily do in Bootstrap */
+
+.fa-twitter {
+	color:#55acee;
+  -ms-transform: scaleX(-1); /* IE 9 */
+  -webkit-transform: scaleX(-1); /* Chrome, Safari, Opera */
+  transform: scaleX(-1);
+}
+
+body {
+	background:rgba(245,248,250,1);
+}
+
+header button {
+	position:absolute;
+	right:10px;
+	top: 10px;
+}
+
+.chirp-box {
+	background-color: rgb(229, 242, 247);
+}
+
+.chirp-item {
+	border-bottom:1px solid #d3d3d3;
+	padding:20px;
+	background-color: white;
+}
+
+.handle {
+	font-size:1.25em;
+	font-weight: 700;
+}
+
+.time {
+	color: #9d9d9d;
+}
+
+.chirp {
+	font-size: 1.5em;
+}
+
+.likes {
+	color:#adadad;
+}
+
+.likes .user-liked {
+	color: red;
+}
+
+.fa-heart {
+	cursor: pointer;
+}

@@ -1,0 +1,45 @@
+{
+  "name": "problem-chirper",
+  "version": "0.2.19.3",
+  "private": true,
+  "dependencies": {
+    "bootstrap": "^4.3.1",
+    "firebase": "^7.14.6",
+    "font-awesome": "^4.7.0",
+    "moment": "^2.24.0",
+    "react": "^16.11.0",
+    "react-dom": "^16.11.0",
+    "react-moment": "^0.9.6",
+    "react-scripts": "^3.4.1"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  },
+  "jest": {
+    "moduleNameMapper": {
+      "\\.(css|less)$": "<rootDir>/../__mocks__/styleMock.js",
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/../__mocks__/fileMock.js"
+    },
+    "setupFiles": [
+      "<rootDir>/node_modules/regenerator-runtime/runtime"
+    ]
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
