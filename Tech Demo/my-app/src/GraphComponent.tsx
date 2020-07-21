@@ -6,6 +6,9 @@ import { max } from 'd3-array';
 import { select } from 'd3-selection';
 //hackerman
 
+// part 2... get labels. follow this example https://bl.ocks.org/d3noob/8952219
+// -Lauren 
+
 interface BarProps{
     data: number[],
     size: number[],
