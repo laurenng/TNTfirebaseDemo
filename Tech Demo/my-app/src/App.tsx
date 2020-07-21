@@ -5,7 +5,7 @@ import HomeScreen from './homeScreen';
 import firebase from 'firebase/app';
 import 'firebase/database';
 import InputForm from './inputForm';
-import GraphComponent from './GraphComponent';
+import BarChart from './GraphComponent';
 
 
 function App() {
@@ -14,6 +14,7 @@ function App() {
       <HomeScreen count={0}></HomeScreen>
       <InputForm></InputForm>
       <p>NEXT PART: D3 library experiment</p>
+      <BarChart data={[4,2,6,2]} size={[500,500]} />
     </div>
   );
 }

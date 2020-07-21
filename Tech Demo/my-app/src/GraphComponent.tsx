@@ -1,80 +1,68 @@
 import React from 'react';
 import './App.css';
 import firebase from 'firebase/app';
+import { scaleLinear } from 'd3-scale';
+import { max } from 'd3-array';
+import { select } from 'd3-selection';
+//hackerman
 
-// defines arbitrary props value of count (which doesn't do ANYTHING!)
-interface homeProps {
-    count: number 
+interface BarProps{
+    data: number[],
+    size: number[],
 }
 
-// defines the states of homeScreen
-interface homeStates {
-    posts: any[]
-}
-
-export default class GraphComponent extends React.Component<homeProps, homeStates> {
-    constructor(props: homeProps, state: homeStates){
-        super(props, state);
-        this.state = {
-            posts:[]
-        };
-      }
-
-    render() {
-        if(!this.state.posts) return null; //if no posts, don't display anything
-        
-        // takes the state's posts array and creates a new div for each post
-        let PostList = this.state.posts.map((key) => {
-            console.log(key);
-            return (
-                <div>
-                    <p>{key.text} said at {key.time} time</p>
-                </div>
-            ) 
-        });
-
-        // returns the list of post divs 
-        return (
-        <div className="container">
-            <h1>Post List Here: </h1>
-            {PostList}
-        </div>
-        );
-    }
-
-    // makes request to firebase to get posts dataset
-    private postReference = firebase.database().ref('posts');
-
-    componentDidMount() { // populates posts array state when component appears on screen (aka mounted)
-        console.log(this.postReference);
-
-        // callback triggered when data is changed/updated 
-        this.postReference.on('value', (snapshot) => {
-          // takes the data snapshot of the post reference
-          let dataset= snapshot.val();
-          console.log(dataset);
-
-          // gets the keys of each post
-          let array = Object.keys(dataset);
-          
-          // goes through the dataset using the keys.
-          let postArray = array.map((key) => {
-              console.log(key)
-              let chirpObj = dataset[key];
-              //chirpObj.id = key;
+class BarChart extends React.Component<BarProps> {
     
-              return chirpObj;
-          });
-          
-          // updates the state with the newly created postArray
-          this.setState({
-            posts: postArray
-          })
-        });
-      }
+    constructor(props: BarProps){
+       super(props)
+       this.createBarChart = this.createBarChart.bind(this)
+    }
+    componentDidMount() { //these are lifecycle methods below:
+       this.createBarChart()
+    }
+    
+    componentDidUpdate() {
+       this.createBarChart()
+    }
+    
+    node: any;
 
-      // removes callback because component isn't being used 
-      componentWillUnmount() {
-        this.postReference.off();
-      }
-}
+    createBarChart() {
+       const node = this.node
+       const dataMax = max(this.props.data) 
+       //console.log(dataMax);
+       const yScale = scaleLinear()
+          .domain([
+              0, 
+              dataMax as number
+            ])
+          .range([0, this.props.size[1]])
+          
+    select(node)
+       .selectAll('rect')
+       .data(this.props.data)
+       .enter()
+       .append('rect')
+    
+    select(node)
+       .selectAll('rect')
+       .data(this.props.data)
+       .exit()
+       .remove()
+    
+    select(node)
+       .selectAll('rect')
+       .data(this.props.data)
+       .style('fill', '#fe9922')
+       .attr('x', (d: any,i: number) => i * 25)
+       .attr('y', (d: any) => this.props.size[1] - yScale(d))
+       .attr('height', (d: any) => yScale(d))
+       .attr('width', 25)
+    }
+ render() {
+       return <svg ref={node => this.node = node}
+       width={300} height={500}>
+       </svg>
+    }
+ }
+ export default BarChart
